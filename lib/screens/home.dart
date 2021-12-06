@@ -27,18 +27,17 @@ class _State extends State<Home> {
                 child: Stack(
                   children: [
                     Positioned(
-                        top: 15,
-                        right: 10,
-                        child: Icon(Icons.person_pin)),
+                        top: 15, right: 10, child: Icon(Icons.person_pin)),
                     Positioned(
-                        top: 15,
-                        left: 10,
-                        child: Text('DOOL',
-                          style: kMontserart,
-                        ),)
+                      top: 15,
+                      left: 10,
+                      child: Text(
+                        'DOOL',
+                        style: kMontserart,
+                      ),
+                    )
                   ],
                 ),
-
               ),
             ),
             Padding(
@@ -60,7 +59,7 @@ class _State extends State<Home> {
                     borderRadius: BorderRadius.circular(16.0),
                   ),
                   focusedBorder: OutlineInputBorder(
-                    borderSide: BorderSide(width: 3, color:Colors.black  ),
+                    borderSide: BorderSide(width: 3, color: Colors.black),
                     borderRadius: BorderRadius.circular(16.0),
                   ),
                 ),
@@ -85,10 +84,12 @@ class _State extends State<Home> {
                       Row(
                         children: [
                           categoryCard(cardColor: Color(0xFF0D2A3F)),
-                          categoryCard(cardColor: Colors.yellow),
+                          categoryCard(cardColor: Colors.blueAccent),
                           categoryCard(cardColor: Colors.deepOrangeAccent),
                           categoryCard(cardColor: Colors.black),
-                          SizedBox(width: 20,)
+                          SizedBox(
+                            width: 20,
+                          )
                         ],
                       )
                     ],
@@ -96,8 +97,7 @@ class _State extends State<Home> {
                 ],
               ),
             ),
-            Expanded(
-                child: Column(
+            Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Padding(
@@ -112,7 +112,7 @@ class _State extends State<Home> {
                 popularCards(size: size),
                 popularCards(size: size),
               ],
-            )),
+            ),
           ],
         ),
       ),
@@ -167,9 +167,24 @@ class popularCards extends StatelessWidget {
                   top: 12,
                   left: 100,
                   child: Column(
-                    children: [Text('jobName',style: kbodytext,), Text('Category',style: kbodytext,)],
+                    children: [
+                      Text(
+                        'jobName',
+                        style: kbodytext,
+                      ),
+                      Text(
+                        'Category',
+                        style: kbodytext,
+                      )
+                    ],
                   )),
-              Positioned(right: 20, top: 30, child: Text('\$55',style: kbodytext,))
+              Positioned(
+                  right: 20,
+                  top: 30,
+                  child: Text(
+                    '\$55',
+                    style: kbodytext,
+                  ))
             ],
           ),
         ),
