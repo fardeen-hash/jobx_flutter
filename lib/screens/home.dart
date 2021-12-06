@@ -1,7 +1,12 @@
 // import 'package:Dool/elements/const.dart';
+import 'dart:ffi';
+import 'dart:math';
+
 import 'package:Dool/elements/const.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 
 class Home extends StatefulWidget {
   @override
@@ -9,6 +14,26 @@ class Home extends StatefulWidget {
 }
 
 class _State extends State<Home> {
+  final _auth = FirebaseAuth.instance;
+  late FirebaseUser loggedInUser;
+
+  @override
+  void initState() {
+    super.initState();
+    getCurrentUser();
+  }
+
+  void getCurrentUser() async {
+    try {
+      final user = await _auth.currentUser();
+      if (user != null) {
+        loggedInUser = user;
+      }
+    } catch (e) {
+      print(e);
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     var size = MediaQuery.of(context).size;
