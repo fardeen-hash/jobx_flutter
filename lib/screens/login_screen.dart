@@ -90,7 +90,7 @@ class _LoginScreenState extends State<LoginScreen> {
             padding: const EdgeInsets.fromLTRB(20, 10, 20, 0),
             child: TextField(
               textAlign: TextAlign.center,
-              obscureText: true,
+              obscureText: false,
               onChanged: (value) {
                 password = value;
               },
