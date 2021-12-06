@@ -75,7 +75,7 @@ class _LoginScreenState extends State<LoginScreen> {
             padding: const EdgeInsets.fromLTRB(20, 10, 20, 0),
             child: TextField(
               decoration: kTextFieldDecoration.copyWith(
-                  hintText: 'email',
+                  hintText: 'mail',
                   prefixIcon: Icon(Icons.account_circle_outlined)),
               textAlign: TextAlign.center,
               onChanged: (value) {
