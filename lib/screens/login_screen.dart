@@ -1,8 +1,9 @@
+// ignore_for_file: import_of_legacy_library_into_null_safe
+
 import 'package:Dool/elements/const.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 
 class LoginScreen extends StatefulWidget {
   LoginScreen({Key? key}) : super(key: key);
@@ -12,10 +13,6 @@ class LoginScreen extends StatefulWidget {
 }
 
 class _LoginScreenState extends State<LoginScreen> {
-  final _auth = FirebaseAuth.instance;
-  late String password;
-  late String email;
-
   @override
   Widget build(BuildContext context) {
     var size = MediaQuery.of(context).size;
@@ -78,9 +75,7 @@ class _LoginScreenState extends State<LoginScreen> {
                   hintText: 'mail',
                   prefixIcon: Icon(Icons.account_circle_outlined)),
               textAlign: TextAlign.center,
-              onChanged: (value) {
-                email = value;
-              },
+              onChanged: (value) {},
             ),
           ),
           // SizedBox(P
@@ -91,9 +86,7 @@ class _LoginScreenState extends State<LoginScreen> {
             child: TextField(
               textAlign: TextAlign.center,
               obscureText: false,
-              onChanged: (value) {
-                password = value;
-              },
+              onChanged: (value) {},
               decoration: kTextFieldDecoration.copyWith(
                   hintText: 'password',
                   prefixIcon: Icon(Icons.vpn_key_rounded),
@@ -119,19 +112,9 @@ class _LoginScreenState extends State<LoginScreen> {
               minWidth: size.width * .35,
               height: 60,
               hoverColor: Colors.black,
-              onPressed: () async {
+              onPressed: () {
                 // Navigator.pushNamed(context, '/homepage');
                 // print(email);
-                // print(password);
-                try {
-                  final newUser = await _auth.createUserWithEmailAndPassword(
-                      email: email, password: password);
-                  if (newUser != null) {
-                    Navigator.pushNamed(context, '/home');
-                  }
-                } catch (e) {
-                  print(e);
-                }
               },
               color: Colors.black,
               shape: RoundedRectangleBorder(
