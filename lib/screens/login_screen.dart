@@ -1,9 +1,12 @@
-// ignore_for_file: import_of_legacy_library_into_null_safe
+// ignore_for_file: import_of_legacy_library_into_null_safe, unused_import, unnecessary_import
 
 import 'package:Dool/elements/const.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
+import 'package:flutter_signin_button/flutter_signin_button.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:google_sign_in/google_sign_in.dart';
 
 class LoginScreen extends StatefulWidget {
   LoginScreen({Key? key}) : super(key: key);
@@ -13,6 +16,10 @@ class LoginScreen extends StatefulWidget {
 }
 
 class _LoginScreenState extends State<LoginScreen> {
+  final _auth = FirebaseAuth.instance;
+  String password = '';
+  String email = '';
+  String error = '';
   @override
   Widget build(BuildContext context) {
     var size = MediaQuery.of(context).size;
@@ -66,16 +73,20 @@ class _LoginScreenState extends State<LoginScreen> {
                 ]),
           ),
           SizedBox(
-            height: 30,
+            height: 10,
           ),
           Padding(
             padding: const EdgeInsets.fromLTRB(20, 10, 20, 0),
             child: TextField(
               decoration: kTextFieldDecoration.copyWith(
-                  hintText: 'mail',
+                  hintText: 'e-mail',
+                  hintStyle: ktextfieldtextstyle.copyWith(
+                      color: Colors.grey.withOpacity(1)),
                   prefixIcon: Icon(Icons.account_circle_outlined)),
               textAlign: TextAlign.center,
-              onChanged: (value) {},
+              onChanged: (value) {
+                email = value;
+              },
             ),
           ),
           // SizedBox(P
@@ -85,13 +96,15 @@ class _LoginScreenState extends State<LoginScreen> {
             padding: const EdgeInsets.fromLTRB(20, 10, 20, 0),
             child: TextField(
               textAlign: TextAlign.center,
-              obscureText: false,
-              onChanged: (value) {},
+              obscureText: true,
+              onChanged: (value) {
+                password = value;
+              },
               decoration: kTextFieldDecoration.copyWith(
                   hintText: 'password',
                   prefixIcon: Icon(Icons.vpn_key_rounded),
                   hintStyle: ktextfieldtextstyle.copyWith(
-                      color: Colors.grey.withOpacity(0.4))),
+                      color: Colors.grey.withOpacity(1))),
             ),
           ),
           // Padding(
@@ -110,15 +123,28 @@ class _LoginScreenState extends State<LoginScreen> {
             child: MaterialButton(
               elevation: 5,
               minWidth: size.width * .35,
-              height: 60,
+              height: 40,
               hoverColor: Colors.black,
-              onPressed: () {
-                // Navigator.pushNamed(context, '/homepage');
+              onPressed: () async {
+                try {
+                  final user = await _auth.signInWithEmailAndPassword(
+                      email: email, password: password);
+                  if (user == null) {
+                    setState(() {
+                      error = 'Wrong email or password';
+                    });
+                  } else {
+                    Navigator.pushNamed(context, '/home');
+                  }
+                } catch (e) {
+                  print(e);
+                }
+                //
                 // print(email);
               },
               color: Colors.black,
               shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.all(Radius.circular(16.0))),
+                  borderRadius: BorderRadius.all(Radius.circular(10.0))),
               child: Text(
                 "Log In",
                 style: TextStyle(
@@ -130,8 +156,20 @@ class _LoginScreenState extends State<LoginScreen> {
               ),
             ),
           ),
+          Text(
+            error,
+            style: TextStyle(color: Colors.red, fontSize: 14.0),
+          ),
+          SizedBox(
+            height: 20,
+          ),
+          SignInButton(
+            Buttons.Google,
+            text: "Sign up with Google",
+            onPressed: () {},
+          ),
           Container(
-            margin: EdgeInsets.fromLTRB(0, 30, 0, 0),
+            margin: EdgeInsets.fromLTRB(0, 15, 0, 0),
             height: 44,
             child: Text(
               "Don't have an Account?",
@@ -145,26 +183,32 @@ class _LoginScreenState extends State<LoginScreen> {
           ),
           Padding(
             padding: const EdgeInsets.fromLTRB(30, 0, 30, 0),
-            child: MaterialButton(
-              elevation: 5,
-              focusColor: Colors.black,
-              minWidth: size.width * .35,
-              height: 60,
-              onPressed: () {
-                Navigator.pushNamed(context, '/home');
-              },
-              color: Colors.blueAccent,
-              shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.all(Radius.circular(16.0))),
-              child: Text(
-                'Sign Up',
-                style: TextStyle(
-                  color: Colors.white,
-                  fontSize: 20,
-                  // fontFamily: 'sfpro',
-                  fontWeight: FontWeight.bold,
+            child: Column(
+              children: <Widget>[
+                MaterialButton(
+                  elevation: 5,
+                  focusColor: Colors.black,
+                  minWidth: size.width * .35,
+                  height: 40,
+                  onPressed: () {
+                    Navigator.pushNamed(context, '/register');
+                  },
+                  color: Colors.black,
+                  shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.all(
+                    Radius.circular(10.0),
+                  )),
+                  child: Text(
+                    'Register',
+                    style: TextStyle(
+                      color: Colors.white,
+                      fontSize: 20,
+                      // fontFamily: 'sfpro',
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
                 ),
-              ),
+              ],
             ),
           ),
         ]),
