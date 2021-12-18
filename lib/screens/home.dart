@@ -1,7 +1,9 @@
+// ignore: duplicate_ignore
+// ignore_for_file: import_of_legacy_library_into_null_safe, unused_import, unnecessary_import, unnecessary_import
+
 // import 'package:Dool/elements/const.dart';
 import 'dart:ffi';
 import 'dart:math';
-
 import 'package:Dool/elements/const.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -14,26 +16,6 @@ class Home extends StatefulWidget {
 }
 
 class _State extends State<Home> {
-  final _auth = FirebaseAuth.instance;
-  late FirebaseUser loggedInUser;
-
-  @override
-  void initState() {
-    super.initState();
-    getCurrentUser();
-  }
-
-  void getCurrentUser() async {
-    try {
-      final user = await _auth.currentUser();
-      if (user != null) {
-        loggedInUser = user;
-      }
-    } catch (e) {
-      print(e);
-    }
-  }
-
   @override
   Widget build(BuildContext context) {
     var size = MediaQuery.of(context).size;

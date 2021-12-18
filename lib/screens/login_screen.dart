@@ -86,6 +86,7 @@ class _LoginScreenState extends State<LoginScreen> {
               textAlign: TextAlign.center,
               onChanged: (value) {
                 email = value;
+                error = '';
               },
             ),
           ),
@@ -93,12 +94,13 @@ class _LoginScreenState extends State<LoginScreen> {
           //   height: 20,
           // ),
           Padding(
-            padding: const EdgeInsets.fromLTRB(20, 10, 20, 0),
+            padding: const EdgeInsets.fromLTRB(20, 10, 20, 10),
             child: TextField(
               textAlign: TextAlign.center,
               obscureText: true,
               onChanged: (value) {
                 password = value;
+                error = ' ';
               },
               decoration: kTextFieldDecoration.copyWith(
                   hintText: 'password',
@@ -118,6 +120,10 @@ class _LoginScreenState extends State<LoginScreen> {
           //   title: 'Password',
           //   next: Icons.vpn_key_sharp,
           // ),
+          Text(
+            error,
+            style: TextStyle(color: Colors.red, fontSize: 14.0),
+          ),
           Padding(
             padding: const EdgeInsets.fromLTRB(30, 10, 30, 0),
             child: MaterialButton(
@@ -127,17 +133,20 @@ class _LoginScreenState extends State<LoginScreen> {
               hoverColor: Colors.black,
               onPressed: () async {
                 try {
-                  final user = await _auth.signInWithEmailAndPassword(
+                  final newUser = await _auth.signInWithEmailAndPassword(
                       email: email, password: password);
-                  if (user == null) {
+                  if (newUser != null) {
+                    Navigator.pushNamed(context, '/home');
+                  } else {
                     setState(() {
                       error = 'Wrong email or password';
                     });
-                  } else {
-                    Navigator.pushNamed(context, '/home');
                   }
                 } catch (e) {
                   print(e);
+                  setState(() {
+                    error = 'Wrong email or password';
+                  });
                 }
                 //
                 // print(email);
@@ -155,10 +164,6 @@ class _LoginScreenState extends State<LoginScreen> {
                 ),
               ),
             ),
-          ),
-          Text(
-            error,
-            style: TextStyle(color: Colors.red, fontSize: 14.0),
           ),
           SizedBox(
             height: 20,

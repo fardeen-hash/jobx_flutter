@@ -1,3 +1,4 @@
+import 'package:Dool/screens/Register_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:Dool/screens/jobPage.dart';
 import 'package:Dool/screens/payment.dart';
@@ -21,6 +22,7 @@ class MyApp extends StatelessWidget {
         '/jobpage': (context) => new jobPage(),
         '/paypage': (context) => new payment(),
         '/home': (context) => new Home(),
+        '/register': (context) => new Registration(),
       },
       // Navigator.pop(context);for going back
     );
