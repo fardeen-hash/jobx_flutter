@@ -8,6 +8,7 @@ import 'package:flutter/widgets.dart';
 import 'package:flutter_signin_button/flutter_signin_button.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:google_sign_in/google_sign_in.dart';
+import 'package:Dool/services/authentication.dart';
 
 class LoginScreen extends StatefulWidget {
   LoginScreen({Key? key}) : super(key: key);
@@ -20,8 +21,8 @@ class _LoginScreenState extends State<LoginScreen> {
   // GoogleSignIn _googleSignIn = GoogleSignIn();
 
   // final _auth = FirebaseAuth.instance;
-  // String password = '';
-  // String email = '';
+  String password = '';
+  String email = '';
   // String error = '';
   @override
   Widget build(BuildContext context) {
@@ -78,6 +79,9 @@ class _LoginScreenState extends State<LoginScreen> {
           SizedBox(
             height: 10,
           ),
+
+          // EMAIL
+
           Padding(
             padding: const EdgeInsets.fromLTRB(20, 10, 20, 0),
             child: TextField(
@@ -88,21 +92,21 @@ class _LoginScreenState extends State<LoginScreen> {
                   prefixIcon: Icon(Icons.account_circle_outlined)),
               textAlign: TextAlign.center,
               onChanged: (value) {
-                // email = value;
+                email = value;
                 // error = '';
               },
             ),
           ),
-          // SizedBox(P
-          //   height: 20,
-          // ),
+
+          //PASSWORD
+
           Padding(
             padding: const EdgeInsets.fromLTRB(20, 10, 20, 10),
             child: TextField(
               textAlign: TextAlign.center,
               obscureText: true,
               onChanged: (value) {
-                // password = value;
+                password = value;
                 // error = ' ';
               },
               decoration: kTextFieldDecoration.copyWith(
@@ -123,8 +127,26 @@ class _LoginScreenState extends State<LoginScreen> {
               minWidth: size.width * .35,
               height: 40,
               hoverColor: Colors.black,
+
+              //LOGIN
+
               onPressed: () {
-                Navigator.pushNamed(context, '/home');
+                AuthenticationHelper()
+                    .signIn(email: email, password: password)
+                    .then((result) {
+                  if (result == null) {
+                    Navigator.pushReplacement(context,
+                        MaterialPageRoute(builder: (context) => Home()));
+                  } else {
+                    // ignore: deprecated_member_use
+                    Scaffold.of(context).showSnackBar(SnackBar(
+                      content: Text(
+                        result,
+                        style: TextStyle(fontSize: 16),
+                      ),
+                    ));
+                  }
+                });
               },
               color: Colors.black,
               shape: RoundedRectangleBorder(
@@ -134,7 +156,7 @@ class _LoginScreenState extends State<LoginScreen> {
                 style: TextStyle(
                   color: Colors.white,
                   fontSize: 20,
-                  fontWeight: FontWeight.bold,
+                  fontWeight: FontWeight.normal,
                 ),
               ),
             ),
@@ -144,7 +166,7 @@ class _LoginScreenState extends State<LoginScreen> {
           ),
           SignInButton(
             Buttons.Google,
-            text: "Sign up with Google",
+            text: "Sign in with Google",
             onPressed: () {},
           ),
           Container(
@@ -168,7 +190,9 @@ class _LoginScreenState extends State<LoginScreen> {
                   focusColor: Colors.black,
                   minWidth: size.width * .35,
                   height: 40,
-                  onPressed: () {},
+                  onPressed: () {
+                    Navigator.pushNamed(context, '/register');
+                  },
                   color: Colors.black,
                   shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.all(
@@ -179,8 +203,7 @@ class _LoginScreenState extends State<LoginScreen> {
                     style: TextStyle(
                       color: Colors.white,
                       fontSize: 20,
-                      // fontFamily: 'sfpro',
-                      fontWeight: FontWeight.bold,
+                      fontWeight: FontWeight.normal,
                     ),
                   ),
                 ),
