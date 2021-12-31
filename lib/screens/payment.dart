@@ -1,4 +1,3 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:Dool/elements/const.dart';
 
@@ -28,7 +27,7 @@ class _paymentState extends State<payment> {
                       color: Colors.black.withOpacity(.7),
                     )
                   ]),
-              margin: EdgeInsets.fromLTRB(30, 150, 30, 40)  ,
+              margin: EdgeInsets.fromLTRB(30, 150, 30, 40),
               width: double.infinity,
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
@@ -40,7 +39,6 @@ class _paymentState extends State<payment> {
                     'NAME',
                     style: kLargeTextStyle,
                   ),
-
                   Text('ELECTRICIAN', style: kMediumTextStyle),
                   SizedBox(
                     height: 20,
@@ -51,7 +49,8 @@ class _paymentState extends State<payment> {
                   ),
                   SizedBox(
                       width: 80,
-                      child: Text('On Friday 18/10/21', style: kMediumTextStyle)),
+                      child:
+                          Text('On Friday 18/10/21', style: kMediumTextStyle)),
                   SizedBox(
                     height: 50,
                   ),
@@ -68,20 +67,24 @@ class _paymentState extends State<payment> {
           ),
           MaterialButton(
             elevation: 7,
-            minWidth: size.width-30,
+            minWidth: size.width - 30,
             height: 60,
-            onPressed: (){
+            onPressed: () {
               Navigator.pushNamed(context, '/carddemo');
             },
             color: Color(0xFF504594),
-            focusColor:  Color(0xFFb7b3e6),
-            shape: RoundedRectangleBorder(borderRadius: BorderRadius.all(Radius.circular(16.0))),
-            child: Text("PAY", style: TextStyle(
-              color: Colors.white,
-              fontSize: 20,
-              // fontFamily: 'sfpro',
-              fontWeight: FontWeight.bold,
-            ),),
+            focusColor: Color(0xFFb7b3e6),
+            shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.all(Radius.circular(16.0))),
+            child: Text(
+              "PAY",
+              style: TextStyle(
+                color: Colors.white,
+                fontSize: 20,
+                // fontFamily: 'sfpro',
+                fontWeight: FontWeight.bold,
+              ),
+            ),
           ),
         ],
       ),

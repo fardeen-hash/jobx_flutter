@@ -1,10 +1,9 @@
-import 'package:Dool/screens/Register_screen.dart';
 import 'package:flutter/material.dart';
-import 'package:Dool/screens/jobPage.dart';
 import 'package:Dool/screens/payment.dart';
 import 'screens/login_screen.dart';
-import 'screens/homepage.dart';
+
 import 'screens/home.dart';
+// import 'package:firebase_core/firebase_core.dart';
 
 void main() => runApp(MyApp());
 
@@ -18,11 +17,8 @@ class MyApp extends StatelessWidget {
       initialRoute: '/',
       routes: {
         '/': (context) => new LoginScreen(),
-        '/homepage': (context) => new HomePage(),
-        '/jobpage': (context) => new jobPage(),
         '/paypage': (context) => new payment(),
         '/home': (context) => new Home(),
-        '/register': (context) => new Registration(),
       },
       // Navigator.pop(context);for going back
     );

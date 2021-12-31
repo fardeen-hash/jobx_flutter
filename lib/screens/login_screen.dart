@@ -1,6 +1,7 @@
-// ignore_for_file: import_of_legacy_library_into_null_safe, unused_import, unnecessary_import
+// ignore_for_file: import_of_legacy_library_into_null_safe, unused_import, unnecessary_import, unused_field
 
 import 'package:Dool/elements/const.dart';
+import 'package:Dool/screens/home.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
@@ -16,10 +17,12 @@ class LoginScreen extends StatefulWidget {
 }
 
 class _LoginScreenState extends State<LoginScreen> {
-  final _auth = FirebaseAuth.instance;
-  String password = '';
-  String email = '';
-  String error = '';
+  // GoogleSignIn _googleSignIn = GoogleSignIn();
+
+  // final _auth = FirebaseAuth.instance;
+  // String password = '';
+  // String email = '';
+  // String error = '';
   @override
   Widget build(BuildContext context) {
     var size = MediaQuery.of(context).size;
@@ -85,8 +88,8 @@ class _LoginScreenState extends State<LoginScreen> {
                   prefixIcon: Icon(Icons.account_circle_outlined)),
               textAlign: TextAlign.center,
               onChanged: (value) {
-                email = value;
-                error = '';
+                // email = value;
+                // error = '';
               },
             ),
           ),
@@ -99,8 +102,8 @@ class _LoginScreenState extends State<LoginScreen> {
               textAlign: TextAlign.center,
               obscureText: true,
               onChanged: (value) {
-                password = value;
-                error = ' ';
+                // password = value;
+                // error = ' ';
               },
               decoration: kTextFieldDecoration.copyWith(
                   hintText: 'password',
@@ -109,21 +112,10 @@ class _LoginScreenState extends State<LoginScreen> {
                       color: Colors.grey.withOpacity(1))),
             ),
           ),
-          // Padding(
-          //   padding: const EdgeInsets.only(top: 10.0),
-          //   child: TextFeildLogin(
-          //     title: 'Username',
-          //     next: Icons.person_pin,
-          //   ),
+          // Text(
+          //   error,
+          //   style: TextStyle(color: Colors.red, fontSize: 14.0),
           // ),
-          // TextFeildLogin(
-          //   title: 'Password',
-          //   next: Icons.vpn_key_sharp,
-          // ),
-          Text(
-            error,
-            style: TextStyle(color: Colors.red, fontSize: 14.0),
-          ),
           Padding(
             padding: const EdgeInsets.fromLTRB(30, 10, 30, 0),
             child: MaterialButton(
@@ -131,25 +123,8 @@ class _LoginScreenState extends State<LoginScreen> {
               minWidth: size.width * .35,
               height: 40,
               hoverColor: Colors.black,
-              onPressed: () async {
-                try {
-                  final newUser = await _auth.signInWithEmailAndPassword(
-                      email: email, password: password);
-                  if (newUser != null) {
-                    Navigator.pushNamed(context, '/home');
-                  } else {
-                    setState(() {
-                      error = 'Wrong email or password';
-                    });
-                  }
-                } catch (e) {
-                  print(e);
-                  setState(() {
-                    error = 'Wrong email or password';
-                  });
-                }
-                //
-                // print(email);
+              onPressed: () {
+                Navigator.pushNamed(context, '/home');
               },
               color: Colors.black,
               shape: RoundedRectangleBorder(
@@ -160,7 +135,6 @@ class _LoginScreenState extends State<LoginScreen> {
                   color: Colors.white,
                   fontSize: 20,
                   fontWeight: FontWeight.bold,
-                  // fontFamily: 'sfpro',
                 ),
               ),
             ),
@@ -182,7 +156,6 @@ class _LoginScreenState extends State<LoginScreen> {
                 color: Color(0xFF191121),
                 fontSize: 20,
                 fontFamily: 'sfpro',
-                // fontWeight: FontWeight.bold
               ),
             ),
           ),
@@ -195,9 +168,7 @@ class _LoginScreenState extends State<LoginScreen> {
                   focusColor: Colors.black,
                   minWidth: size.width * .35,
                   height: 40,
-                  onPressed: () {
-                    Navigator.pushNamed(context, '/register');
-                  },
+                  onPressed: () {},
                   color: Colors.black,
                   shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.all(

@@ -144,18 +144,14 @@ class popularCards extends StatelessWidget {
           width: size.width - 30,
           height: 100,
           decoration: BoxDecoration(
-            color: Color(0xFFFFFFFF).withOpacity(0.1),
-            borderRadius: BorderRadius.circular(10),
-            border: Border.all(
-              color: Colors.black54,
-              width: .9,
-            ),
+            color: Colors.white,
+            borderRadius: BorderRadius.circular(8),
             boxShadow: [
               BoxShadow(
-                color: Colors.grey.withOpacity(0.1),
+                color: Colors.grey.withOpacity(0.5),
                 spreadRadius: 2,
                 blurRadius: 4,
-                offset: Offset(0, 3), // changes position of shadow
+                offset: const Offset(0, 3), // changes position of shadow
               ),
             ],
           ),
@@ -238,43 +234,3 @@ class categoryCard extends StatelessWidget {
     );
   }
 }
-
-// Container(
-// width: size.width,
-// child: Padding(
-// padding: const EdgeInsets.fromLTRB(10, 15, 0, 30),
-// child: Text(
-// 'Morning User',
-// textAlign: TextAlign.left,
-// textScaleFactor: .75,
-// style: TextStyle(
-// color: Color(0xFF0D2A3F),
-// fontFamily: 'Roboto',
-// fontSize: 57.0,
-// fontWeight: FontWeight.w500),
-// ),
-// ),
-// ),
-// Text(
-// 'Category',
-// textAlign: TextAlign.left,
-// ),Container(
-// width: size.width,
-// child: Padding(
-// padding: const EdgeInsets.fromLTRB(10, 15, 0, 30),
-// child: Text(
-// 'Morning User',
-// textAlign: TextAlign.left,
-// textScaleFactor: .75,
-// style: TextStyle(
-// color: Color(0xFF0D2A3F),
-// fontFamily: 'Roboto',
-// fontSize: 57.0,
-// fontWeight: FontWeight.w500),
-// ),
-// ),
-// ),
-// Text(
-// 'Category',
-// textAlign: TextAlign.left,
-// ),
